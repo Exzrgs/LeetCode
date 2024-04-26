@@ -17,7 +17,7 @@ class Solution:
             if l2:
                 sum_val += l2.val
                 l2 = l2.next
-            carry = sum_val//10
+            carry = sum_val // 10
             tail.next = ListNode(sum_val % 10)
             tail = tail.next
 
