@@ -1,5 +1,8 @@
 """
 条件が満たされたときにその場で追加すればよい。返り値で管理しようとしてたのに引っ張られて実装してしまった
+answer→bracket_combinations
+bracket_stack→brackets
+queue→processing_brackets
 
 listじゃなく文字列で管理すれば簡潔には書けるが、再構築の可能性があるのがちょっと微妙
 leetcodeのsolutionsだとみんなopen_countとclose_countを引数にして、状態は文字列で管理してるんだな
