@@ -8,7 +8,8 @@ nは定数だから引数に含めなくてよい
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         parentheses_combinations = []
-        def append_parenthesis(parentheses, open_count):
+        parentheses = []
+        def append_parenthesis(open_count):
             if len(parentheses) == n * 2:
                 parentheses_combinations.append("".join(parentheses))
                 return
@@ -16,12 +17,12 @@ class Solution:
             close_count = len(parentheses) - open_count
             if open_count < n:
                 parentheses.append("(")
-                append_parenthesis(parentheses, open_count + 1)
+                append_parenthesis(open_count + 1)
                 parentheses.pop()
             if open_count > close_count:
                 parentheses.append(")")
-                append_parenthesis(parentheses, open_count)
+                append_parenthesis(open_count)
                 parentheses.pop()
 
-        append_parenthesis([], 0)
+        append_parenthesis(0)
         return parentheses_combinations
