@@ -17,3 +17,26 @@ class Solution:
                 if next_str in word_dict_set:
                     dp[i].add("")
         return "" in dp[len(s)]
+
+# メモ化再帰
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        word_dict_set = set(wordDict)
+        memo = dict()
+        def can_word_break(current_index, start_index):
+            if current_index == len(s):
+                return current_index == start_index
+            
+            if (current_index, start_index) in memo:
+                return memo[(current_index, start_index)]
+            
+            if can_word_break(current_index + 1, start_index):
+                memo[(current_index, start_index)] = True
+                return True
+            if s[start_index : current_index + 1] in word_dict_set and can_word_break(current_index + 1, current_index + 1):
+                memo[(current_index, current_index)] = True
+                return True
+            memo[(current_index, start_index)] = False
+            return False
+        
+        return can_word_break(0, 0)

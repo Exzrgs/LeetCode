@@ -6,11 +6,7 @@ wordの最大長で枝狩りしたほうがよいという話はたしかに
     このコードだと最適化はされていなさそう?
 
 前を削っていくような実装もできる。残ってる文字列を管理して、indexを右に見ていって、wordなら再帰する
-        for i in range(1, len(remaining_s)):
-            prefix = remaining_s[:i]
-            if prefix in wordSet and self.dfs(remaining_s[i:], wordSet, memo):
-                memo[remaining_s] = True
-                return True
+状態数が減るので良い
 """
 
 # dp
@@ -36,20 +32,18 @@ class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         word_dict_set = set(wordDict)
         memo = dict()
-        def can_word_break(current_index, start_index):
-            if current_index == len(s):
-                return current_index == start_index
-            
-            if (current_index, start_index) in memo:
-                return memo[(current_index, start_index)]
-            
-            if can_word_break(current_index + 1, start_index):
-                memo[(current_index, start_index)] = True
+        def can_word_break(remaining_s):
+            if remaining_s in memo:
+                return memo[remaining_s]
+            if remaining_s in word_dict_set:
                 return True
-            if s[start_index : current_index + 1] in word_dict_set and can_word_break(current_index + 1, current_index + 1):
-                memo[(current_index, current_index)] = True
-                return True
-            memo[(current_index, start_index)] = False
+            
+            for i in range(1, len(remaining_s)):
+                prefix = remaining_s[:i]
+                if prefix in word_dict_set and can_word_break(remaining_s[i:]):
+                    memo[remaining_s] = True
+                    return True
+            memo[remaining_s] = False
             return False
         
-        return can_word_break(0, 0)
+        return can_word_break(s)
