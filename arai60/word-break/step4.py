@@ -8,7 +8,7 @@ class Solution:
         can_break[0] = True
         max_word_len = max([len(word) for word in wordDict])
         word_dict_set = set(wordDict)
-        for start in range(len(s) + 1):
+        for start in range(len(s)):
             if not can_break[start]:
                 continue
             for end in range(start + 1, min(start + max_word_len + 1, len(s) + 1)):
@@ -43,7 +43,7 @@ class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         can_break = [False] * (len(s) + 1)
         can_break[0] = True
-        for start in range(len(s) + 1):
+        for start in range(len(s)):
             if not can_break[start]:
                 continue
             for word in wordDict:
