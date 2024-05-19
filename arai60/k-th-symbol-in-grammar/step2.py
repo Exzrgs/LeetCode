@@ -1,5 +1,5 @@
 """
-even_odd → one
+even_odd → is_one
 row_half_lengthを定義
 条件を一行にまとめる
 k % 2 != 0 → k % 2 == 1
