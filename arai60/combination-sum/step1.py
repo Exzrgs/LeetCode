@@ -33,3 +33,19 @@ class Solution:
         return target_combinations
 
 # stackでも書いてみる
+# 実際再帰の深さによってどのようなデメリットがあるのかとかをちゃんと把握できていない気がする
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        target_combinations = []
+        combination_stack = [([], 0, 0)]
+        while combination_stack:
+            combination, value_sum, current_index = combination_stack.pop()
+            if value_sum == target:
+                target_combinations.append(combination)
+                continue
+            if value_sum > target:
+                continue
+            
+            for i in range(current_index, len(candidates)):
+                combination_stack.append((combination + [candidates[i]], value_sum + candidates[i], i))
+        return target_combinations
