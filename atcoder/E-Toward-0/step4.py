@@ -19,6 +19,7 @@ https://zenn.dev/ryo_kawamata/articles/learn_decorator_in_python
     こんな感じで自分でも定義して使える
 
 浮動小数点数(floating-point number)について復習
+https://ja.wikipedia.org/wiki/%E6%B5%AE%E5%8B%95%E5%B0%8F%E6%95%B0%E7%82%B9%E6%95%B0
     IEEE 754
     符号部(sign)、指数部(exponent)、仮数部(fraction)
     単精度: 32bit (1, 8, 23)
