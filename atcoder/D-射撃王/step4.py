@@ -6,7 +6,7 @@
     __len__は、len()に対する振る舞いを定義できるのだろう
 というくらいの理解
 """
-
+# bisect_leftで切り分ける
 import math
 from bisect import bisect_left
 from collections.abc import Sequence
@@ -43,6 +43,51 @@ def compute_min_score(num_inputs, heights, speeds):
     
     s = S()
     return bisect_left(s, True, key=scorable)
+
+def main():
+    num_inputs, heights, speeds = parse_inputs()
+    print(compute_min_score(num_inputs, heights, speeds))
+
+if __name__ == '__main__':
+    main()
+
+# 関数で切り分ける
+import math
+from bisect import bisect_left
+from collections.abc import Sequence
+
+def parse_inputs():
+    num_inputs = int(input())
+    heights = []
+    speeds = []
+    for _ in range(num_inputs):
+        h, s = map(int, input().split())
+        heights.append(h)
+        speeds.append(s)
+    return num_inputs, heights, speeds
+
+def compute_min_score(num_inputs, heights, speeds):
+    def my_bisect_left(f, x, lo, hi):
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if f(mid) < x:
+                lo = mid + 1
+            else:
+                hi = mid
+        return hi
+    
+    def scorable(height_limit):
+        time_limits = []
+        for i in range(num_inputs):
+            t = math.floor((height_limit - heights[i]) / speeds[i])
+            time_limits.append(t)
+        time_limits.sort()
+        for i in range(num_inputs):
+            if time_limits[i] < i:
+                return False
+        return True
+    
+    return my_bisect_left(scorable, True, 0, max(heights) + max(speeds) * num_inputs)
 
 def main():
     num_inputs, heights, speeds = parse_inputs()
