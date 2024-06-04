@@ -45,11 +45,11 @@ class Solution:
             if n == 0:
                 return 1
             exp = 1
-            powered = n
+            powered = x
             while exp + exp <= n:
                 powered *= powered
                 exp += exp
-            return powered * power(x, n - powered)
+            return powered * power(x, n - exp)
         
         if n < 0:
             return 1 / power(x, -n)
