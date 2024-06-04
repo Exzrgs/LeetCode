@@ -22,6 +22,20 @@ https://github.com/shining-ai/leetcode/pull/45/files
         return power_result
 
 繰り返し二乗法(Binary Exponentation)
+powのドキュメントを読んでみる
+    https://docs.python.org/ja/3/library/functions.html#pow
+    pow(base, epx, mod=None)
+        変数名baseは参考になる
+    base ** expと等価
+    第二引数が負の数だったら、引数は浮動小数点数に変換される
+    baseが負の数で指数が整数じゃなかったら、複素数が返される
+        すごい
+    3.8からmod上でマイナス乗が計算できるようになった
+        つまり、逆数も計算できる
+    3.8から、modに関してキーワード引数を取れるようになった
+        位置引数: 引数の位置で指定 pow(x, n, p)
+        キーワード引数: 引数のキーワードで指定 pow(x, n, mod=p)
+
 関数名powerでよい
 """
 
