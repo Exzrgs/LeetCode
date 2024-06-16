@@ -38,6 +38,38 @@ https://ja.wikipedia.org/wiki/%E6%B5%AE%E5%8B%95%E5%B0%8F%E6%95%B0%E7%82%B9%E6%9
             仮数部が0: 符号方向の無限
             仮数部が0以外: 非数NaN
         指数部, 仮数部が0: 0
+
+lru_cacheのドキュメントを読む(https://docs.python.org/3/library/functools.html#functools.lru_cache)
+    @functools.lru_cache(user_function)
+    @functools.lru_cache(maxsize=128, typed=False)
+    
+    I/Oバウンドの関数でも有効なのか、たしかに。
+    スレッドセーフ。
+    引数はハッシュ可能じゃなければならない。それはそう
+    LRU。サイズ制限になったときは一番前に使ったやつが消える
+    typedがtrueだと、異なる型に対して別でキャッシュされる。
+    キャッシュを管理する関数を追加する
+        ・cache_parameters()
+        ・cache_info()
+            >>> fib.cache_info()
+            CacheInfo(hits=28, misses=16, maxsize=None, currsize=16)
+        ・cache_clear()
+    time()とかrandom()とか、結果が一意にならないものには適してない
+
+cacheのドキュメント読む(https://docs.python.org/3/library/functools.html#functools.cache)
+    @cache
+    def factorial(n):
+        return n * factorial(n-1) if n else 1
+
+    >>> factorial(10)      # no previously cached result, makes 11 recursive calls
+    3628800
+    >>> factorial(5)       # just looks up cached value result
+    120
+    >>> factorial(12)      # makes two new recursive calls, the other 10 are cached
+    479001600
+
+    lru_cache(maxsize=None)と同じ
+    サイズ制限がないため、古い値を消す必要がなく、高速
 """
 from functools import lru_cache
 
