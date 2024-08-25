@@ -4,6 +4,10 @@ Question:
 Test:
     empty
     count > len(list)
+
+なるほど
+rightを最初にnだけ進めておけば、rightがNoneになった時には、leftは削除するやつのprevになってる
+賢い
 """
 
 class Solution:
