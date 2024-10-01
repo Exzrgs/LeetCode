@@ -1,6 +1,6 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        digits_to_letters = {
+        digit_to_letters = {
             "2": "abc",
             "3": "def",
             "4": "ghi",
@@ -18,7 +18,7 @@ class Solution:
                 res.append("".join(combs))
                 return
             
-            for c in digits_to_letters[digits[index]]:
+            for c in digit_to_letters[digits[index]]:
                 combs.append(c)
                 dfs(index + 1)
                 combs.pop()
